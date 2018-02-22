@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <!--bootstrap-->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="jumbotron">
+        <div class="divPersons">
+            <button id="attack1" class="btn btn-primary" value="1"><p id="point1"></p>Attack1</button>
+            <button id="attack2" class="btn btn-primary" value="2"><p id="point2"></p>Attack2</button>
+            <button id="attack3" class="btn btn-primary" value="3"><p id="point3"></p>Attack3</button>
+            <button id="attack4" class="btn btn-primary" value="4"><p id="point4"></p>Attack4</button>
+        </div>
+        <p>Your Character</p>
+        <div id="divCharacter"></div>
+
+        <div id="divText">
+            <button class="btn btn-danger" id="btn-Attack">Attack</button>
+        </div>
+
+        <p>Defender</p>
+        <div id="divDefender"></div>
+    </div>
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            var character = $("#divCharacter");
+            var defender = $("#divDefender");
+
+            var idCharacterH, idDefenderH; //obj selected
+            var texto = '<p>Game over<p>';
+            var attacks = {
+
+                "1": {
+                    "Health Points": 150,
+                    "Attack Power": 6,
+                    "Counter Attack Power": 50
+                },
+
+                "2": {
+                    "Health Points": 100,
+                    "Attack Power": 5,
+                    "Counter Attack Power": 40
+                },
+                "3": {
+                    "Health Points": 170,
+                    "Attack Power": 7,
+                    "Counter Attack Power": 70
+                },
+                "4": {
+                    "Health Points": 200,
+                    "Attack Power": 8,
+                    "Counter Attack Power": 80
+                }
+            };
+
+            initialize();
+
+            function initialize() {
+                // $('#point1, #point2, #point3, #point4').each(function(index) {
+                //     var txt = this.id;
+                //     var cont = 1;
+                //     txt.text(attacks[cont]["Health Points"]);
+                //     cont++;
+
+                $("#point1").text(attacks["1"]["Health Points"]);
+                $("#point2").text(attacks["2"]["Health Points"]);
+                $("#point3").text(attacks["3"]["Health Points"]);
+                $("#point4").text(attacks["4"]["Health Points"]);
+            };
+
+            $(".btn-primary").on('click', function() {
+
+                if (character.children().length == 0) {
+                    idCharacterH = attacks[this.value];
+                    // console.log(idCharacterH);
+                    character.append(this);
+                    $("#divPersons").remove(this);
+                    // console.log(attacks[idCharacter]["Health Points"]);
+                } else if (defender.children().length == 0) {
+                    idDefenderH = attacks[this.value];
+                    // console.log(idDefender);
+                    defender.append(this);
+                    $("#divPersons").remove(this);
+                }
+            });
+
+            $("#btn-Attack").on("click", function() {
+                //debugger;
+                // console.log(idCharacterH);
+                // console.log(idDefenderH);
+
+                if (idCharacterH["Health Points"] <= 0 || idDefenderH["Health Points"] <= 0) {
+                    $("#divText").append(texto);
+                    $("#btn-Attack").addClass('disabled');
+                } else {
+                    idCharacterH["Health Points"] -= idDefenderH["Health Points"];
+                    idDefenderH["Health Points"] -= idCharacterH["Health Points"];
+                    initialize();
+                }
+
+            });
+
+
+
+
+
+
+        });
+    </script>
+</body>
+
+</html>
