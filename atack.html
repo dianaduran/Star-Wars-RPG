@@ -19,24 +19,29 @@
     <div class="jumbotron">
         <h1 class="text-center">Star Wars RPG</h1>
         <hr>
-        <div class="divPersons">
-            <h3>Characters</h3>
-            <button id="attack1" class="btn btn-primary" value="1"><p id="point1"></p>Attack1</button>
-            <button id="attack2" class="btn btn-primary" value="2"><p id="point2"></p>Attack2</button>
-            <button id="attack3" class="btn btn-primary" value="3"><p id="point3"></p>Attack3</button>
-            <button id="attack4" class="btn btn-primary" value="4"><p id="point4"></p>Attack4</button>
-        </div>
-        <br>
-        <p>Your Character</p>
-        <div id="divCharacter"></div>
+        <div class="row">
 
-        <div id="divText">
-            <button class="btn btn-danger" id="btn-Attack">Attack</button>
-            <p id="text"></p>
+            <div id="divPersons" class="col-md -6">
+                <h3>Characters</h3>
+                <button id="attack1" class="btn btn-primary" value="1"><p id="point1"></p>Attack1</button>
+                <button id="attack2" class="btn btn-primary" value="2"><p id="point2"></p>Attack2</button>
+                <button id="attack3" class="btn btn-primary" value="3"><p id="point3"></p>Attack3</button>
+                <button id="attack4" class="btn btn-primary" value="4"><p id="point4"></p>Attack4</button>
+            </div>
+            <br>
+            <div class="col-md-6">
+                <p>Your Character</p>
+                <div id="divCharacter"></div>
+
+                <div id="divText">
+                    <button class="btn btn-danger" id="btn-Attack">Attack</button>
+                    <p id="text"></p>
+                </div>
+                <br>
+                <p>Defender</p>
+                <div id="divDefender"></div>
+            </div>
         </div>
-        <br>
-        <p>Defender</p>
-        <div id="divDefender"></div>
     </div>
 
 
