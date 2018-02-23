@@ -28,6 +28,7 @@
 
         <div id="divText">
             <button class="btn btn-danger" id="btn-Attack">Attack</button>
+            <p id="text"></p>
         </div>
 
         <p>Defender</p>
@@ -42,7 +43,7 @@
             var defender = $("#divDefender");
 
             var idCharacterH, idDefenderH; //obj selected
-            var texto = '<p>Game over<p>';
+            // var texto = '<p>Game over<p>';
             var attacks = {
 
                 "1": {
@@ -87,26 +88,23 @@
 
                 if (character.children().length == 0) {
                     idCharacterH = attacks[this.value];
-                    // console.log(idCharacterH);
                     character.append(this);
                     $("#divPersons").remove(this);
-                    // console.log(attacks[idCharacter]["Health Points"]);
                 } else if (defender.children().length == 0) {
                     idDefenderH = attacks[this.value];
-                    // console.log(idDefender);
                     defender.append(this);
                     $("#divPersons").remove(this);
+                    $("#btn-Attack").removeClass('disabled');
+                    $("#text").text('');
                 }
             });
 
             $("#btn-Attack").on("click", function() {
-                //debugger;
-                // console.log(idCharacterH);
-                // console.log(idDefenderH);
 
                 if (idCharacterH["Health Points"] <= 0 || idDefenderH["Health Points"] <= 0) {
-                    $("#divText").append(texto);
+                    $("#text").text('Game over');
                     $("#btn-Attack").addClass('disabled');
+                    $("#divDefender").empty();
                 } else {
                     idCharacterH["Health Points"] -= idDefenderH["Health Points"];
                     idDefenderH["Health Points"] -= idCharacterH["Health Points"];
